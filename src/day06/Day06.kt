@@ -2,6 +2,7 @@ package day06
 
 import readInput
 import readTest
+import transposeMatrix
 import java.awt.Event.DOWN
 import java.awt.Event.UP
 import java.nio.file.DirectoryNotEmptyException
@@ -91,16 +92,6 @@ class Day06 {
             direction = direction.turnRight()
             wereWasIAlready.add(Memory(x, y, direction))
         }
-    }
-
-    fun transposeMatrix(matrix: Array<Array<Char>>): Array<Array<Char>> {
-        val transposed = Array(matrix[0].size) { Array(matrix.size) { ' ' } }
-        for (i in matrix.indices) {
-            for (j in matrix[i].indices) {
-                transposed[j][i] = matrix[i][j]
-            }
-        }
-        return transposed
     }
 
     fun part1(input: List<String>): Int {

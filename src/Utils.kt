@@ -25,3 +25,13 @@ fun String.md5() = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteA
  * The cleaner shorthand for printing output.
  */
 fun Any?.println() = println(this)
+
+fun transposeMatrix(matrix: Array<Array<Char>>): Array<Array<Char>> {
+    val transposed = Array(matrix[0].size) { Array(matrix.size) { ' ' } }
+    for (i in matrix.indices) {
+        for (j in matrix[i].indices) {
+            transposed[j][i] = matrix[i][j]
+        }
+    }
+    return transposed
+}
