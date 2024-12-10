@@ -35,3 +35,25 @@ fun transposeMatrix(matrix: Array<Array<Char>>): Array<Array<Char>> {
     }
     return transposed
 }
+
+enum class Direction {
+    UP, DOWN, LEFT, RIGHT;
+}
+
+data class Position(val x: Int, val y: Int) {
+
+    fun moveInDirection(direction: Direction): Position {
+        when (direction) {
+            Direction.UP -> return Position(x, y - 1)
+            Direction.DOWN -> return Position(x, y + 1)
+            Direction.LEFT -> return Position(x - 1, y)
+            Direction.RIGHT -> return Position(x + 1, y)
+        }
+
+    }
+
+
+    fun isInBounds(max: Int): Boolean {
+        return x >= 0 && y >= 0 && x < max && y < max
+    }
+}
