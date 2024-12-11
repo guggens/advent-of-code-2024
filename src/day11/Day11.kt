@@ -39,26 +39,51 @@ class Day11 {
     fun blinkStorage(stones: Map<Long, Long>): MutableMap<Long, Long> {
         val newStones = mutableMapOf<Long, Long>()
         stones.forEach { entry ->
-            for (i in 0..<entry.value) {
-                if (entry.key == 0L) {
-                    val count = newStones[1] ?: 0
-                    newStones[1] = count + 1
-                } else if (entry.key.toString().length % 2 == 0) {
-                    val stone = entry.key.toString()
-                    val left = stone.substring(0, stone.length / 2).toLong()
-                    val right = stone.substring(stone.length / 2).toLong()
 
-                    val countLeft = newStones[left] ?: 0
-                    newStones[left] = countLeft + 1
+            // we do know we have entry.value stones
 
-                    val countRight = newStones[right] ?: 0
-                    newStones[right] = countRight + 1
-                } else {
-                    val newKey = entry.key * 2024
-                    val count = newStones[newKey] ?: 0
-                    newStones[newKey] = count + 1
-                }
+            if (entry.key == 0L) {
+                val count = newStones[1] ?: 0
+                newStones[1] = count + entry.value
+            } else if (entry.key.toString().length % 2 == 0) {
+                val stone = entry.key.toString()
+                val left = stone.substring(0, stone.length / 2).toLong()
+                val right = stone.substring(stone.length / 2).toLong()
+
+                val countLeft = newStones[left] ?: 0
+                newStones[left] = countLeft + entry.value
+
+                val countRight = newStones[right] ?: 0
+                newStones[right] = countRight + entry.value
+            } else {
+                val newKey = entry.key * 2024
+                val count = newStones[newKey] ?: 0
+                newStones[newKey] = count + entry.value
             }
+
+
+//
+//
+//            for (i in 0..<entry.value) {
+//                if (entry.key == 0L) {
+//                    val count = newStones[1] ?: 0
+//                    newStones[1] = count + 1
+//                } else if (entry.key.toString().length % 2 == 0) {
+//                    val stone = entry.key.toString()
+//                    val left = stone.substring(0, stone.length / 2).toLong()
+//                    val right = stone.substring(stone.length / 2).toLong()
+//
+//                    val countLeft = newStones[left] ?: 0
+//                    newStones[left] = countLeft + 1
+//
+//                    val countRight = newStones[right] ?: 0
+//                    newStones[right] = countRight + 1
+//                } else {
+//                    val newKey = entry.key * 2024
+//                    val count = newStones[newKey] ?: 0
+//                    newStones[newKey] = count + 1
+//                }
+//            }
         }
         return newStones
     }
