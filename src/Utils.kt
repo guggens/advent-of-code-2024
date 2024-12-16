@@ -38,6 +38,20 @@ fun transposeMatrix(matrix: Array<Array<Char>>): Array<Array<Char>> {
 
 enum class Direction {
     UP, DOWN, LEFT, RIGHT;
+
+    fun turn90Right(): Direction {
+        if (this == UP) return RIGHT
+        if (this == RIGHT) return DOWN
+        if (this == DOWN) return LEFT
+        return UP
+    }
+
+    fun invert(): Direction {
+        if (this == UP) return DOWN
+        if (this == DOWN) return UP
+        if (this == LEFT) return RIGHT
+        return LEFT
+    }
 }
 
 data class Position(val x: Int, val y: Int) {
@@ -52,8 +66,30 @@ data class Position(val x: Int, val y: Int) {
 
     }
 
-
     fun isInBounds(max: Int): Boolean {
         return x >= 0 && y >= 0 && x < max && y < max
     }
+}
+
+class Matrix(input: List<String>) {
+
+    var matrix: Array<Array<Char>> = transposeMatrix(input.map { it.toCharArray().toTypedArray() }.toTypedArray())
+
+    fun findChar(char: Char): Position {
+        for (i in matrix.indices) {
+            for (j in matrix[0].indices) {
+                if (matrix[i][j] == char) {
+                    return Position(i, j)
+                }
+            }
+        }
+        return Position(-1, -1)
+    }
+
+    fun getChar(pos: Position): Char {
+        return matrix[pos.x][pos.y]
+    }
+
+
+
 }
