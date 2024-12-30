@@ -1,7 +1,6 @@
 package day15
 
 import Position
-import println
 import readInput
 import readTest
 import kotlin.test.Test
